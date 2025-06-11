@@ -13,7 +13,7 @@ export const getOnePatient =
       }
 
       const res = await apiCall<PatientApiResponse<Patient>>(
-         `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/Patient/${id}`,
+         `${BACKEND_SERVICES_BASE_ROUTES.EHR}/Patient/${id}`,
          {
             headers: {
                "x-api-key": "123456",

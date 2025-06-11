@@ -16,7 +16,7 @@ export const getAllPatients =
       });
 
       const res = await apiCall<PatientApiResponseWithPagination<Patient[]>>(
-         `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/Patient/get-all-patients?${params}`,
+         `${BACKEND_SERVICES_BASE_ROUTES.EHR}/Patient/get-all-patients?${params}`,
       );
 
       return res;

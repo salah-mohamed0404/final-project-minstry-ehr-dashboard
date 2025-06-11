@@ -8,38 +8,41 @@ import {
 } from "@/components/ui/table";
 import WithLoadingAndError from "@/components/WithLoadingAndError";
 import { useTranslation } from "react-i18next";
-import { useGetAllReceptionists } from "./hooks/useGetAllReceptionists";
-import ReceptionistRow from "./ReceptionistRow";
+import { useGetAllHospitals } from "./hooks/useGetAllHospitals";
+import HospitalRow from "./HospitalRow";
 
-function ReceptionistsList() {
+function HospitalsList() {
    const { t } = useTranslation("staff");
-   const { data, isLoading, isError } = useGetAllReceptionists();
-   const receptionists = data?.data.items || [];
+   const { data, isLoading, isError } = useGetAllHospitals();
+   const hospitals = data?.data.items || [];
 
    return (
       <WithLoadingAndError
          isLoading={isLoading}
-         hasError={isError || receptionists.length === 0}
-         errorText={t("no-receptionists-found")}
+         hasError={isError || hospitals.length === 0}
+         errorText="No hospitals found"
       >
-         <TableWrapper totalPages={data?.data.meta.last_page}>
+         <TableWrapper totalPages={data?.data.meta.lastPage}>
             <Table className="min-w-[70rem]">
                <TableHeader>
                   <TableRow>
                      <TableHead className="w-[50px]">#</TableHead>
-                     <TableHead>National ID</TableHead>
+                     <TableHead>Hospital Code</TableHead>
                      <TableHead>Name</TableHead>
-                     <TableHead>Email</TableHead>
-                     <TableHead>Phone</TableHead>
+                     <TableHead>Director Name</TableHead>
+                     <TableHead>Licenses Number</TableHead>
+                     <TableHead>address</TableHead>
+                     <TableHead>Type</TableHead>
+                     <TableHead>createdAt</TableHead>
                      <TableHead>Is Active</TableHead>
                      <TableHead className="w-[55px]">Actions</TableHead>
                   </TableRow>
                </TableHeader>
                <TableBody>
-                  {receptionists.map((receptionist, index) => (
-                     <ReceptionistRow
-                        receptionist={receptionist}
-                        key={receptionist.id}
+                  {hospitals.map((hospital, index) => (
+                     <HospitalRow
+                        hospital={hospital}
+                        key={hospital.id}
                         rowNumber={index + 1}
                      />
                   ))}
@@ -50,4 +53,4 @@ function ReceptionistsList() {
    );
 }
 
-export default ReceptionistsList;
+export default HospitalsList;

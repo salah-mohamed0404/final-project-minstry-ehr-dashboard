@@ -13,7 +13,7 @@ export const getOneMedicalRecord =
       }
 
       const res = await apiCall<PatientApiResponse<MedicalRecord>>(
-         `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/MedicalRecords/${id}`,
+         `${BACKEND_SERVICES_BASE_ROUTES.EHR}/MedicalRecords/${id}`,
       );
 
       return res;

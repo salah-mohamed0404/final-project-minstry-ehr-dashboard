@@ -2,21 +2,21 @@ import { BACKEND_SERVICES_BASE_ROUTES } from "@/constants";
 import { createQueryString } from "@/lib/createQueryString";
 import { apiCall } from "@/services/apiCall";
 
-type GetAllBookingsParams = {
+type GetAllHospitalsParams = {
    page?: string;
    search?: string;
 };
 
-export const getAllBookings =
-   ({ page, search }: GetAllBookingsParams = {}) =>
+export const getAllHospitals =
+   ({ page, search }: GetAllHospitalsParams = {}) =>
    async () => {
       const params = createQueryString({
          page,
          search,
       });
 
-      const res = await apiCall<StaffApiResponseWithPagination<Booking[]>>(
-         `${BACKEND_SERVICES_BASE_ROUTES.BOOKING}/bookings?${params}`,
+      const res = await apiCall<HospitalApiResponseWithPagination<Hospital[]>>(
+         `${BACKEND_SERVICES_BASE_ROUTES.EHR}/Hospital/get-all-hospitals?${params}`,
       );
 
       return res;

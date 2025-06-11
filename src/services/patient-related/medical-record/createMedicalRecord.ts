@@ -5,7 +5,7 @@ export const createMedicalRecord = async (
    data: MedicalRecordRequestWithPatientId,
 ) => {
    const res = await apiCall<PatientApiResponse<MedicalRecord>>(
-      `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/MedicalRecords`,
+      `${BACKEND_SERVICES_BASE_ROUTES.EHR}/MedicalRecords`,
       {
          method: "POST",
          body: JSON.stringify(data),

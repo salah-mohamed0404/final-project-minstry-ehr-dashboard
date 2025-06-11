@@ -3,7 +3,7 @@ import { apiCall, ApiResponse } from "@/services/apiCall";
 
 export const getPatientsAnalytics = () => async () => {
    const res = await apiCall<ApiResponse<PatientsAnalytics[]>>(
-      `${BACKEND_SERVICES_BASE_ROUTES.BOOKING}/analytics `,
+      `${BACKEND_SERVICES_BASE_ROUTES.EHR}/analytics `,
    );
 
    return res;

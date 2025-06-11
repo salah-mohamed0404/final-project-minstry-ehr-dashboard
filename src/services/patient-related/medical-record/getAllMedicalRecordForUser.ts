@@ -19,7 +19,7 @@ export const getAllMedicalRecordForUser =
       const res = await apiCall<
          PatientApiResponseWithPagination<MedicalRecord[]>
       >(
-         `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/MedicalRecords/get-all-medical-records-for-patient-by-Id/${patientId}?${params}`,
+         `${BACKEND_SERVICES_BASE_ROUTES.EHR}/MedicalRecords/get-all-medical-records-for-patient-by-Id/${patientId}?${params}`,
       );
 
       return res;

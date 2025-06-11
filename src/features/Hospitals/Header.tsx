@@ -2,26 +2,23 @@ import Filter from "@/assets/icons/Filter";
 import MainHeader from "@/components/MainHeader";
 import { Button } from "@/components/ui/button";
 import SearchInput from "@/features/common/SearchInput";
-import { useTranslation } from "react-i18next";
 import { FiPlus } from "react-icons/fi";
-import AddEditReceptionistDialog from "./AddEditReceptionistDialog";
+import AddEditHospitalsDialog from "./AddEditHospitalsDialog";
 
 function Header() {
-   const { t } = useTranslation(["global", "staff"]);
-
    return (
       <MainHeader>
          <MainHeader.TopSection>
             <MainHeader.Title
-               title={t("staff:receptionists")}
-               description={t("staff:receptionist-header-description")}
+               title="Hospitals"
+               description="Manage hospitals and their details"
             />
             <MainHeader.Actions>
-               <AddEditReceptionistDialog
+               <AddEditHospitalsDialog
                   triggerButton={
                      <Button className="flex items-center gap-2">
                         <FiPlus className="text-2xl" />
-                        {t("global:add")} {t("staff:receptionist")}
+                        Add Hospital
                      </Button>
                   }
                />

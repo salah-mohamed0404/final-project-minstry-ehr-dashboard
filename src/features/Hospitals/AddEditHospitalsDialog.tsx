@@ -17,62 +17,64 @@ import InputField from "@/components/form/InputField";
 import { useTranslation } from "react-i18next";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "react-toastify";
-import { receptionistFormValidationSchema } from "./constants/receptionistFormValidationSchema";
-import { getOneReceptionist } from "@/services/receptionists/getOneReceptionist";
-import { createReceptionist } from "@/services/receptionists/createReceptionist";
-import { updateReceptionist } from "@/services/receptionists/updateReceptionist";
+import { hospitalFormValidationSchema } from "./constants/hospitalFormValidationSchema";
+import { getOneHospital } from "@/services/hospitals/getOneHospital";
+import { createHospital } from "@/services/hospitals/createHospital";
+import { updateHospital } from "@/services/hospitals/updateHospital";
 import SideBySideInputsContainer from "@/components/SideBySideInputsContainer";
+import SelectField from "@/components/fields/SelectField";
 
-const DEFAULT_INITIAL_VALUES: ReceptionistRequest = {
-   first_name: "",
-   last_name: "",
-   email: "",
-   phone: "",
-   national_id: "",
-   is_active: true,
+const DEFAULT_INITIAL_VALUES: HospitalRequest = {
+   name: "",
+   hospitalCode: "",
+   address: "",
+   directorName: "",
+   licencesNumber: "",
+   type: "",
+   isActive: true,
 };
 
-type AddEditReceptionistsProps = {
+const hospitalTypeOptions: { label: string; value: HospitalType }[] = [
+   { label: "Public", value: "Public" },
+   { label: "Private", value: "Private" },
+   { label: "University", value: "University" },
+   { label: "Charity", value: "Charity" },
+];
+
+type AddEditHospitalsProps = {
    id?: string;
    triggerButton: ReactNode;
 };
 
-function AddEditReceptionistsDialog({
-   id,
-   triggerButton,
-}: AddEditReceptionistsProps) {
+function AddEditHospitalsDialog({ id, triggerButton }: AddEditHospitalsProps) {
    const [open, setOpen] = useState(false);
    const { t } = useTranslation("staff");
    const { data: receptionist, isLoading: isGettingReceptionist } =
-      useCustomQuery(
-         [QUERY_KEYS.RECEPTIONIST, id],
-         getOneReceptionist({ id }),
-         {
-            enabled: !!id,
-         },
-      );
+      useCustomQuery([QUERY_KEYS.HOSPITAL, id], getOneHospital({ id }), {
+         enabled: !!id,
+      });
 
-   const { mutate: createReceptionistMutate, isPending: isCreatePending } =
+   const { mutate: createHospitalMutate, isPending: isCreatePending } =
       useOptimisticMutation({
-         mutationFn: createReceptionist,
-         queryKey: [QUERY_KEYS.RECEPTIONISTS],
+         mutationFn: createHospital,
+         queryKey: [QUERY_KEYS.HOSPITALS],
          mutationType: "add",
       });
-   const { mutate: updateReceptionistMutate, isPending: isUpdatePending } =
+   const { mutate: updateHospitalMutate, isPending: isUpdatePending } =
       useOptimisticMutation({
-         mutationFn: updateReceptionist,
-         queryKey: [QUERY_KEYS.RECEPTIONISTS],
+         mutationFn: updateHospital,
+         queryKey: [QUERY_KEYS.HOSPITALS],
          mutationType: "edit",
       });
    const isPending =
       isCreatePending || isUpdatePending || isGettingReceptionist;
 
    const handleSubmit = (
-      values: ReceptionistRequest,
-      { resetForm }: FormikHelpers<ReceptionistRequest>,
+      values: HospitalRequest,
+      { resetForm }: FormikHelpers<HospitalRequest>,
    ) => {
       if (id) {
-         updateReceptionistMutate(
+         updateHospitalMutate(
             { id, newData: values },
             {
                onSuccess: () => {
@@ -85,7 +87,7 @@ function AddEditReceptionistsDialog({
             },
          );
       } else {
-         createReceptionistMutate(values, {
+         createHospitalMutate(values, {
             onSuccess: () => {
                setOpen(false);
                resetForm();
@@ -104,30 +106,33 @@ function AddEditReceptionistsDialog({
             initialValues={
                id
                   ? {
-                       first_name:
-                          receptionist?.data?.first_name ||
-                          DEFAULT_INITIAL_VALUES.first_name,
-                       last_name:
-                          receptionist?.data?.last_name ||
-                          DEFAULT_INITIAL_VALUES.last_name,
-                       email:
-                          receptionist?.data?.email ||
-                          DEFAULT_INITIAL_VALUES.email,
-                       phone:
-                          receptionist?.data?.phone ||
-                          DEFAULT_INITIAL_VALUES.phone,
-                       national_id:
-                          receptionist?.data?.national_id ||
-                          DEFAULT_INITIAL_VALUES.national_id,
-                       is_active:
-                          Boolean(receptionist?.data?.is_active) ||
-                          DEFAULT_INITIAL_VALUES.is_active,
+                       name:
+                          receptionist?.data.name ||
+                          DEFAULT_INITIAL_VALUES.name,
+                       hospitalCode:
+                          receptionist?.data.hospitalCode ||
+                          DEFAULT_INITIAL_VALUES.hospitalCode,
+                       address:
+                          receptionist?.data.address ||
+                          DEFAULT_INITIAL_VALUES.address,
+                       directorName:
+                          receptionist?.data.directorName ||
+                          DEFAULT_INITIAL_VALUES.directorName,
+                       licencesNumber:
+                          receptionist?.data.licencesNumber ||
+                          DEFAULT_INITIAL_VALUES.licencesNumber,
+                       type:
+                          receptionist?.data.type ||
+                          DEFAULT_INITIAL_VALUES.type,
+                       isActive:
+                          receptionist?.data.isActive ??
+                          DEFAULT_INITIAL_VALUES.isActive,
                     }
                   : DEFAULT_INITIAL_VALUES
             }
             onSubmit={handleSubmit}
             enableReinitialize
-            validationSchema={receptionistFormValidationSchema}
+            validationSchema={hospitalFormValidationSchema}
          >
             {({ values, setFieldValue, submitForm }) => (
                <DialogContent className="sm:max-w-3xl">
@@ -145,52 +150,64 @@ function AddEditReceptionistsDialog({
                   <Form>
                      <SideBySideInputsContainer>
                         <InputField
-                           id="first_name"
-                           name="first_name"
-                           label="First Name"
-                           placeholder="Enter first name"
+                           id="name"
+                           name="name"
+                           label="Name"
+                           placeholder="Enter Hospital Name"
                            disabled={isPending}
                            className="min-w-24"
                         />
                         <InputField
-                           id="last_name"
-                           name="last_name"
-                           label="Last Name"
-                           placeholder="Enter last name"
+                           id="hospitalCode"
+                           name="hospitalCode"
+                           label="Hospital Code"
+                           placeholder="Enter Hospital Code"
                            disabled={isPending}
                            className="min-w-24"
                         />
                      </SideBySideInputsContainer>
 
                      <InputField
-                        id="email"
-                        name="email"
-                        label="Email"
-                        placeholder="Enter email"
+                        id="address"
+                        name="address"
+                        label="Address"
+                        placeholder="Enter Address"
                         disabled={isPending}
                      />
 
                      <SideBySideInputsContainer>
                         <InputField
-                           id="phone"
-                           name="phone"
-                           label="Phone"
-                           placeholder="Enter phone number"
+                           id="directorName"
+                           name="directorName"
+                           label="Director Name"
+                           placeholder="Enter Director Name"
                            disabled={isPending}
                         />
                         <InputField
-                           id="national_id"
-                           name="national_id"
-                           label="National ID"
+                           id="licencesNumber"
+                           name="licencesNumber"
+                           label="Licences Number"
                            placeholder="Enter national id number"
                            disabled={isPending}
                         />
                      </SideBySideInputsContainer>
 
+                     <SelectField
+                        name="type"
+                        isUseSearchParam={false}
+                        label="Hospital Type"
+                        placeholder="Select Hospital Type"
+                        value={values.type}
+                        options={hospitalTypeOptions}
+                        onChange={(value) => setFieldValue("type", value)}
+                        disabled={isPending}
+                        containerClassName="mb-6 grow"
+                     />
+
                      <div className="ms-1 flex items-center gap-2">
                         <h3>Is active?</h3>
                         <Switch
-                           checked={values.is_active}
+                           checked={values.isActive}
                            onCheckedChange={(checked) =>
                               setFieldValue("is_active", checked)
                            }
@@ -210,4 +227,4 @@ function AddEditReceptionistsDialog({
    );
 }
 
-export default AddEditReceptionistsDialog;
+export default AddEditHospitalsDialog;

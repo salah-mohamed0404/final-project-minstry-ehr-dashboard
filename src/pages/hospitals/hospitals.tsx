@@ -1,6 +1,6 @@
 import PageLayout from "@/components/layouts/PageLayout";
-import Header from "@/features/Receptionists/Header";
-import ReceptionistsList from "@/features/Receptionists/ReceptionistsList";
+import Header from "@/features/Hospitals/Header";
+import HospitalsList from "@/features/Hospitals/HospitalsList";
 
 function Hospitals() {
    return (
@@ -9,7 +9,7 @@ function Hospitals() {
          className="flex animate-fade-in flex-col gap-7"
       >
          <Header />
-         <ReceptionistsList />
+         <HospitalsList />
       </PageLayout>
    );
 }

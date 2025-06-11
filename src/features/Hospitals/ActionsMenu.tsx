@@ -5,20 +5,20 @@ import {
    DropdownMenuItem,
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useDeleteReceptionist } from "./hooks/useDeleteReceptionist";
-import AddEditReceptionistDialog from "./AddEditReceptionistDialog";
+import AddEditHospitalsDialog from "./AddEditHospitalsDialog";
 import ActionBtn from "@/components/ActionBtn";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { useDeleteHospital } from "./hooks/useDeleteHospital";
 
 type ActionsMenuProps = {
    id: string;
 };
 
 function ActionsMenu({ id }: ActionsMenuProps) {
-   const { mutate } = useDeleteReceptionist();
+   const { mutate } = useDeleteHospital();
 
-   const handleDeleteReceptionist = () => {
+   const handleDeleteHospital = () => {
       mutate({ id });
    };
 
@@ -28,7 +28,7 @@ function ActionsMenu({ id }: ActionsMenuProps) {
             <ActionBtn />
          </DropdownMenuTrigger>
          <DropdownMenuContent className="flex min-w-fit flex-col gap-2">
-            <AddEditReceptionistDialog
+            <AddEditHospitalsDialog
                id={id}
                triggerButton={
                   <Button
@@ -43,7 +43,7 @@ function ActionsMenu({ id }: ActionsMenuProps) {
 
             <DropdownMenuItem
                className="text-red-500"
-               onClick={handleDeleteReceptionist}
+               onClick={handleDeleteHospital}
             >
                Delete
                <FaRegTrashCan />

@@ -8,7 +8,7 @@ type UpdatePatientParams = {
 
 export const updatePatient = async ({ id, newData }: UpdatePatientParams) => {
    const res = await apiCall<PatientApiResponse<Patient>>(
-      `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/Patient`,
+      `${BACKEND_SERVICES_BASE_ROUTES.EHR}/Patient`,
       {
          method: "PUT",
          body: JSON.stringify({ id, ...newData }),

@@ -1,4 +1,4 @@
-type PatientApiMeta = {
+type HospitalApiMeta = {
    currentPage: number;
    perPage: number;
    total: number;

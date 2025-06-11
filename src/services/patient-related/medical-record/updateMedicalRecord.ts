@@ -11,7 +11,7 @@ export const updateMedicalRecord = async ({
    newData,
 }: UpdateMedicalRecordParams) => {
    const res = await apiCall<PatientApiResponse<MedicalRecord>>(
-      `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/MedicalRecords`,
+      `${BACKEND_SERVICES_BASE_ROUTES.EHR}/MedicalRecords`,
       {
          method: "PUT",
          body: JSON.stringify({ id, ...newData }),

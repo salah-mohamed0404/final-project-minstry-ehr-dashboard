@@ -1,0 +1,15 @@
+{
+   "staff-management": "Staff Management",
+   "doctors": "Doctors",
+   "doctor-list": "Doctor List",
+   "add-doctor": "Add Doctor",
+   "search-here": "Search here...",
+   "profile": "Profile",
+   "appointment": "Appointment",
+   "add": "Add",
+   "edit": "Edit",
+   "filter": "Filter",
+   "something-went-wrong": "Something went wrong",
+   "the-action-done-successfully": "The action done successfully",
+   "no-data-found": "No data found"
+}

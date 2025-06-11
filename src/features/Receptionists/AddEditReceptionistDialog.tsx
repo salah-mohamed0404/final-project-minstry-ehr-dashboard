@@ -18,9 +18,9 @@ import { useTranslation } from "react-i18next";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "react-toastify";
 import { receptionistFormValidationSchema } from "./constants/receptionistFormValidationSchema";
-import { getOneReceptionist } from "@/services/staff/receptionists/getOneReceptionist";
-import { createReceptionist } from "@/services/staff/receptionists/createReceptionist";
-import { updateReceptionist } from "@/services/staff/receptionists/updateReceptionist";
+import { getOneReceptionist } from "@/services/receptionists/getOneReceptionist";
+import { createReceptionist } from "@/services/receptionists/createReceptionist";
+import { updateReceptionist } from "@/services/receptionists/updateReceptionist";
 import SideBySideInputsContainer from "@/components/SideBySideInputsContainer";
 
 const DEFAULT_INITIAL_VALUES: ReceptionistRequest = {

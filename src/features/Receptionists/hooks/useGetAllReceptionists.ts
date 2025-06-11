@@ -1,6 +1,6 @@
 import { QUERY_KEYS } from "@/constants";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
-import { getAllReceptionists } from "@/services/staff/receptionists/getAllReceptionists";
+import { getAllReceptionists } from "@/services/receptionists/getAllReceptionists";
 import { useSearchParams } from "react-router-dom";
 
 export const useGetAllReceptionists = () => {

@@ -137,13 +137,11 @@ function AddEditHospitalsDialog({ id, triggerButton }: AddEditHospitalsProps) {
             {({ values, setFieldValue, submitForm }) => (
                <DialogContent className="sm:max-w-3xl">
                   <DialogHeader>
-                     <DialogTitle>
-                        {id ? t("edit") : t("add")} {t("nurse")}
-                     </DialogTitle>
+                     <DialogTitle>{id ? "Edit" : "Add"} Hospitals</DialogTitle>
                      <DialogDescription>
                         {id
-                           ? "Edit the details of the nurse."
-                           : "Add a new nurse to the system."}
+                           ? "Edit the details of the hospital."
+                           : "Add a new hospital to the system."}
                      </DialogDescription>
                   </DialogHeader>
 

@@ -21,7 +21,7 @@ import { updateMedicalRecord } from "@/services/patient-related/medical-record/u
 import TextareaField from "@/components/form/TextareaField";
 import SelectSearchField from "@/components/form/SelectSearchField";
 import { medicalRecordFormValidationSchema } from "./constants/medicalRecordFormValidationSchema";
-import { getAllDoctorsLookup } from "@/services/bookings/getAllDoctorsLookup";
+// import { getAllDoctorsLookup } from "@/services/bookings/getAllDoctorsLookup";
 import ConditionsSection from "./Conditions/ConditionsSection";
 import MedicationsSection from "./Medications/MedicationsSection";
 import { Separator } from "@/components/ui/separator";
